@@ -8,7 +8,7 @@ package com.mec.mutiFileTransfer.prepare;
  */
 public class OffsetLength {
     private long offset;
-    private long length;
+    private int length;
 
     public long getOffset() {
         return offset;
@@ -18,15 +18,15 @@ public class OffsetLength {
         this.offset = offset;
     }
 
-    public long getLength() {
+    public int getLength() {
         return length;
     }
 
-    public void setLength(long length) {
+    public void setLength(int length) {
         this.length = length;
     }
 
-    public OffsetLength(long offset, long length) {
+    public OffsetLength(long offset, int length) {
         this.offset = offset;
         this.length = length;
     }

@@ -21,7 +21,7 @@ public class FileSectionHead {
         this.offsetLength = offsetLength;
     }
 
-    public FileSectionHead(int fileNo,long offset,long length) {
+    public FileSectionHead(int fileNo,long offset,int length) {
         this.fileNo = fileNo;
         this.offsetLength.setOffset(offset);
         this.offsetLength.setLength(length);
