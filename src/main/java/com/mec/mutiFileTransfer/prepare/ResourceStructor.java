@@ -19,9 +19,20 @@ public class ResourceStructor {
 
     private static int temIndex;
 
+    private int index;
+
     public ResourceStructor() {
         this.resourcesDirectories = new ArrayList<String>();
         this.fileList = new ArrayList<ResourceFileInfo>();
+        this.index = 0;
+    }
+
+    public boolean hasNext() {
+        return this.fileList.size() > this.index;
+    }
+
+    public ResourceFileInfo next() {
+        return this.fileList.get(this.index++);
     }
 
     public void setResourthId(String resourthId) {
