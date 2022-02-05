@@ -33,9 +33,25 @@ public class DefaultDistribute implements IResourceStrategyDistribute{
             curSize = resourceFileInfo.getFileSize();
 
             if (curSize > this.maxSize) {
-                // 开始分割
+                while(curSize != 0) {
+                    int distributeSize = curSize > maxSize ? (int)maxSize: (int)curSize;
+
+                    FileSectionHead fileSectionHead = new FileSectionHead(resourceFileInfo.getFileNo()
+                                            ,resourceFileInfo.getFileSize() - curSize,distributeSize);
+
+                    index = index++ % senderCount;
+
+                    resourceFileSectionInfoList.get(index).addFileSection(fileSectionHead);
+                    curSize -= distributeSize;
+                }
+
             } else {
-                // 直接添加
+                OffsetLength offsetLength = new OffsetLength(0, (int) resourceFileInfo.getFileSize());
+                FileSectionHead fileSectionHead = new FileSectionHead(resourceFileInfo.getFileNo(),offsetLength);
+
+                index = index++ % senderCount;
+
+                resourceFileSectionInfoList.get(index).addFileSection(fileSectionHead);
             }
         }
         return resourceFileSectionInfoList;
