@@ -30,4 +30,9 @@ public class OffsetLength {
         this.offset = offset;
         this.length = length;
     }
+
+    @Override
+    public String toString() {
+        return offset + ":" + length;
+    }
 }

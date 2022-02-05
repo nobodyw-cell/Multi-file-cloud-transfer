@@ -7,4 +7,5 @@ package com.mec.mutiFileTransfer.prepare;
  * @Date 2022/2/5 下午5:51
  */
 public class FileSectionReader {
+
 }

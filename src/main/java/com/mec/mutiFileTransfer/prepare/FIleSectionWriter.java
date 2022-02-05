@@ -6,5 +6,6 @@ package com.mec.mutiFileTransfer.prepare;
  * @Author wfh
  * @Date 2022/2/5 下午5:52
  */
-public class FIleSectionWritee {
+public class FIleSectionWriter {
+
 }
