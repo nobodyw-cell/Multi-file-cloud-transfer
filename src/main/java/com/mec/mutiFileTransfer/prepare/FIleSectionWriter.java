@@ -26,7 +26,12 @@ public class FIleSectionWriter {
         this.fileSection = fileSection;
     }
 
-    public void write() throws IOException {
+    /**
+     * 有可能对同一个文件写所以要加锁
+     *
+     * @throws IOException
+     */
+    public synchronized void write() throws IOException {
         this.rafWrite.seek(fileSectionHead.getOffsetLength().getOffset());
         this.rafWrite.write(this.fileSection);
     }
