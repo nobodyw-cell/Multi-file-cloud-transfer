@@ -19,6 +19,7 @@ public class Test {
         UnrecivedFileSection unrecivedFileSection = new UnrecivedFileSection(30);
         unrecivedFileSection.receive(new OffsetLength(0,5));
         unrecivedFileSection.receive(new OffsetLength(16,2));
+        unrecivedFileSection.receive(new OffsetLength(19,3));
         System.out.println(unrecivedFileSection.getUnreceivedlist());
     }
 
