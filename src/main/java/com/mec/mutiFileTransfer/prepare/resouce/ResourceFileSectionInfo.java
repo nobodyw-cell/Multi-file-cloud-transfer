@@ -1,4 +1,6 @@
-package com.mec.mutiFileTransfer.prepare;
+package com.mec.mutiFileTransfer.prepare.resouce;
+
+import com.mec.mutiFileTransfer.prepare.common.FileSectionHead;
 
 import java.util.ArrayList;
 import java.util.Comparator;

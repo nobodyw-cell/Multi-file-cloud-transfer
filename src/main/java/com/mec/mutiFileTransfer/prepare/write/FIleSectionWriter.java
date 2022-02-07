@@ -1,4 +1,6 @@
-package com.mec.mutiFileTransfer.prepare;
+package com.mec.mutiFileTransfer.prepare.write;
+
+import com.mec.mutiFileTransfer.prepare.common.FileSectionHead;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;

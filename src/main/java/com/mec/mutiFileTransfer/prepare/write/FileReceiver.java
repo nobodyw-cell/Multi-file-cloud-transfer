@@ -1,4 +1,4 @@
-package com.mec.mutiFileTransfer.prepare;
+package com.mec.mutiFileTransfer.prepare.write;
 
 /**
  * //TODO add class commment here

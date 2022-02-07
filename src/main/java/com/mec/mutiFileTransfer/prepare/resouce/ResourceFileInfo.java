@@ -1,4 +1,4 @@
-package com.mec.mutiFileTransfer.prepare;
+package com.mec.mutiFileTransfer.prepare.resouce;
 
 import java.util.Objects;
 

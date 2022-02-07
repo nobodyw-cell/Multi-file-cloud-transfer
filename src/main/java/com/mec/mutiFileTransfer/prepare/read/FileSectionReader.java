@@ -1,4 +1,6 @@
-package com.mec.mutiFileTransfer.prepare;
+package com.mec.mutiFileTransfer.prepare.read;
+
+import com.mec.mutiFileTransfer.prepare.common.FileSectionHead;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -18,6 +20,11 @@ public class FileSectionReader {
         this.fileSection = fileSection;
     }
 
+
+    public FileSectionHead getFileSectionHead() {
+        return fileSectionHead;
+    }
+
     public void setFileSectionHead(FileSectionHead fileSectionHead) {
         this.fileSectionHead = fileSectionHead;
     }
@@ -28,11 +35,15 @@ public class FileSectionReader {
 
     public void read() throws IOException {
         long offset = fileSectionHead.getOffsetLength().getOffset();
-        long len = fileSectionHead.getOffsetLength().getLength();
+        int len = fileSectionHead.getOffsetLength().getLength();
 
-        this.fileSection = new byte[(int)len];
+        this.fileSection = new byte[len];
 
         this.rafRead.seek(offset);
         this.rafRead.read(this.fileSection);
+    }
+
+    public byte[] getFileSection() {
+        return fileSection;
     }
 }

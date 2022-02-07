@@ -1,5 +1,5 @@
-import com.mec.mutiFileTransfer.prepare.OffsetLength;
-import com.mec.mutiFileTransfer.prepare.UnrecivedFileSection;
+import com.mec.mutiFileTransfer.prepare.common.OffsetLength;
+import com.mec.mutiFileTransfer.prepare.common.UnrecivedFileSection;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,6 +13,12 @@ import java.io.RandomAccessFile;
  * @Date 2022/2/5 下午6:01
  */
 public class Test {
+
+    @org.junit.Test
+    public void test2() {
+        System.out.println(1<<15);
+        System.out.println(32 * 1024);
+    }
 
     @org.junit.Test
     public void test() {

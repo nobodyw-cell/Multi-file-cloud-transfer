@@ -1,4 +1,6 @@
-package com.mec.mutiFileTransfer.prepare;
+package com.mec.mutiFileTransfer.prepare.read;
+
+import com.mec.mutiFileTransfer.prepare.common.FileSectionHead;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.mec.mutiFileTransfer.prepare;
+package com.mec.mutiFileTransfer.prepare.resouce;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -79,8 +79,4 @@ public class ResourceStructor {
             }
         }
     }
-
-
-
-
 }

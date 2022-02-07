@@ -1,7 +1,8 @@
-package com.mec.mutiFileTransfer.prepare;
+package com.mec.mutiFileTransfer.prepare.common;
+
+import com.mec.mutiFileTransfer.prepare.common.OffsetLength;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * //TODO add class commment here

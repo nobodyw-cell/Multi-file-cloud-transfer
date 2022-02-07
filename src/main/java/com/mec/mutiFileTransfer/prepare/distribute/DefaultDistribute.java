@@ -1,4 +1,10 @@
-package com.mec.mutiFileTransfer.prepare;
+package com.mec.mutiFileTransfer.prepare.distribute;
+
+import com.mec.mutiFileTransfer.prepare.common.FileSectionHead;
+import com.mec.mutiFileTransfer.prepare.common.OffsetLength;
+import com.mec.mutiFileTransfer.prepare.resouce.ResourceFileInfo;
+import com.mec.mutiFileTransfer.prepare.resouce.ResourceFileSectionInfo;
+import com.mec.mutiFileTransfer.prepare.resouce.ResourceStructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +15,12 @@ import java.util.List;
  * @Author wfh
  * @Date 2022/2/4 下午10:26
  */
-public class DefaultDistribute implements IResourceStrategyDistribute{
+public class DefaultDistribute implements IResourceStrategyDistribute {
 
     private int maxSize;
 
     public DefaultDistribute() {
-        this.maxSize = DEFAULT_SIZE;
+        this.maxSize = DEFAULT_MAX_SIZE;
     }
 
     @Override
@@ -34,7 +40,7 @@ public class DefaultDistribute implements IResourceStrategyDistribute{
 
             if (curSize > this.maxSize) {
                 while(curSize != 0) {
-                    int distributeSize = curSize > maxSize ? (int)maxSize: (int)curSize;
+                    int distributeSize = curSize > maxSize ? maxSize: (int)curSize;
 
                     FileSectionHead fileSectionHead = new FileSectionHead(resourceFileInfo.getFileNo()
                                             ,resourceFileInfo.getFileSize() - curSize,distributeSize);
@@ -46,6 +52,7 @@ public class DefaultDistribute implements IResourceStrategyDistribute{
                 }
 
             } else {
+                // 为什么这里能够进行强制转换呢,因为已经判断他小于8M了
                 OffsetLength offsetLength = new OffsetLength(0, (int) resourceFileInfo.getFileSize());
                 FileSectionHead fileSectionHead = new FileSectionHead(resourceFileInfo.getFileNo(),offsetLength);
 

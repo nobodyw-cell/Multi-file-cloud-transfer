@@ -1,4 +1,6 @@
-package com.mec.mutiFileTransfer.prepare;
+package com.mec.mutiFileTransfer.prepare.common;
+
+import com.mec.mutiFileTransfer.prepare.resouce.ResourceStructor;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,6 +16,12 @@ import java.util.Map;
  */
 public class RandomAccessFilePool {
     private static Map<Integer, RandomAccessFile> rafPool;
+    private ResourceStructor resourceStructor;
+
+    public void setResourceStructor(ResourceStructor resourceStructor) {
+        this.resourceStructor = resourceStructor;
+    }
+
     static {
         rafPool = new HashMap<>();
     }
