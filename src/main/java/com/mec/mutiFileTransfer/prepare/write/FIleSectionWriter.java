@@ -16,6 +16,9 @@ public class FIleSectionWriter {
     private RandomAccessFile rafWrite;
     private byte[] fileSection;
 
+    public FIleSectionWriter() {
+    }
+
     public void setFileSectionHead(FileSectionHead fileSectionHead) {
         this.fileSectionHead = fileSectionHead;
     }

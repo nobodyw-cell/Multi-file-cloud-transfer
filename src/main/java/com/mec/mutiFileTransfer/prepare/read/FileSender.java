@@ -78,7 +78,9 @@ public class FileSender {
                 fileSectionSender.setFileSectionHead(fileSectionReader.getFileSectionHead());
                 fileSectionSender.sendFileSection();
             }
-
+            fileSectionSender.sendEnd();
         }
+
+
     }
 }

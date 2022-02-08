@@ -20,12 +20,22 @@ public class FileSectionReceiver {
         this.dis = dis;
     }
 
+    public int getFileNo() {
+        return this.fileSectionHead.getFileNo();
+    }
+
+    public byte[] getFileSection() {
+        return this.fileSection;
+    }
+
+
+
     public void setFileSectionHead(FileSectionHead fileSectionHead) {
         this.fileSectionHead = fileSectionHead;
     }
 
     public int receive() throws IOException {
-        byte[] headBytes = new byte[16];
+        byte[] headBytes = new byte[FileSectionHead.HEAD_LEN];
         int readLen = 0;
 
         this.dis.read(headBytes);

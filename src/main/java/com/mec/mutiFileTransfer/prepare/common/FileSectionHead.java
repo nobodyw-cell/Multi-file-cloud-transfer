@@ -20,7 +20,7 @@ public class FileSectionHead {
      *
      */
     public static final int DEFAULT_SECTION_LEN = 1 << 15;
-    private static final int HEAD_LEN = 4 + 8 +8;
+    public static final int HEAD_LEN = 4 + 4 +8;
     private int fileNo;
     private OffsetLength offsetLength;
 
