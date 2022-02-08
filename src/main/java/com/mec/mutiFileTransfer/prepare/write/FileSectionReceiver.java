@@ -24,19 +24,20 @@ public class FileSectionReceiver {
         this.fileSectionHead = fileSectionHead;
     }
 
-    public void receive() {
+    public int receive() throws IOException {
         byte[] headBytes = new byte[16];
+        int readLen = 0;
 
-        try {
-            this.dis.read(headBytes);
+        this.dis.read(headBytes);
 
-            this.fileSectionHead = new FileSectionHead(headBytes);
+        this.fileSectionHead = new FileSectionHead(headBytes);
+        readLen = this.fileSectionHead.getOffsetLength().getLength();
 
+        if (readLen > 0) {
             this.fileSection = new byte[this.fileSectionHead.getOffsetLength().getLength()];
-
             this.dis.read(fileSection);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
+        return readLen;
     }
 }

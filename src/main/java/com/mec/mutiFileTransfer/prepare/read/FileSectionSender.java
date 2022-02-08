@@ -37,4 +37,13 @@ public class FileSectionSender {
             e.printStackTrace();
         }
     }
+
+    public void sendEnd() {
+        FileSectionHead fileSectionHead = new FileSectionHead(-1,0,0);
+        try {
+            this.dos.write(fileSectionHead.toBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
