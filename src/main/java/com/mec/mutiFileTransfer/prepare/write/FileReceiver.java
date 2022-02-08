@@ -2,6 +2,8 @@ package com.mec.mutiFileTransfer.prepare.write;
 
 import com.mec.mutiFileTransfer.prepare.common.FileSectionHead;
 import com.mec.mutiFileTransfer.prepare.common.RandomAccessFilePool;
+import com.mec.mutiFileTransfer.prepare.common.UnreceivedFilePool;
+import com.mec.mutiFileTransfer.prepare.common.UnrecivedFileSection;
 import com.mec.mutiFileTransfer.prepare.resouce.ResourceStructor;
 
 import java.io.DataInputStream;
@@ -18,6 +20,7 @@ public class FileReceiver {
     private DataInputStream dis;
     private ResourceStructor resourceStructor;
     private RandomAccessFilePool randomAccessFilePool;
+    private UnreceivedFilePool unreceivedFilePool;
 
 
     public FileReceiver(DataInputStream dis,
@@ -25,6 +28,7 @@ public class FileReceiver {
         this.dis = dis;
         this.resourceStructor = resourceStructor;
         this.randomAccessFilePool = new RandomAccessFilePool(resourceStructor);
+        this.unreceivedFilePool = new UnreceivedFilePool(resourceStructor);
     }
 
     public void receive() {
@@ -34,19 +38,43 @@ public class FileReceiver {
             int readLen = fileSectionReceiver.receive();
 
             while (readLen > 0) {
-                int fileNo = fileSectionReceiver.getFileNo();
+                FileSectionHead fileSectionHead = fileSectionReceiver.getFileSectionHead();
+
+                int fileNo = fileSectionHead.getFileNo();
+
+                UnrecivedFileSection unrecivedFileSection = this.unreceivedFilePool.getUnReceivedFileSection(fileNo);
                 RandomAccessFile raf = this.randomAccessFilePool.getRaf(fileNo,"rw");
 
-                FIleSectionWriter fIleSectionWriter = new FIleSectionWriter();
+                FileSectionWriter fIleSectionWriter = new FileSectionWriter();
                 fIleSectionWriter.setFileSection(fileSectionReceiver.getFileSection());
                 fIleSectionWriter.setRafWrite(raf);
-
                 fIleSectionWriter.write();
+
+                unrecivedFileSection.receive(fileSectionHead.getOffsetLength());
+
+                if (unrecivedFileSection.isReceiveAll()) {
+                    this.randomAccessFilePool.close(fileNo);
+                    this.unreceivedFilePool.remove(fileNo);
+                }
 
                 readLen = fileSectionReceiver.receive();
             }
+
+
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        if  (this.unreceivedFilePool.isReceiveAll()) {
+            if (this.dis != null) {
+                try {
+                    this.dis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    this.dis = null;
+                }
+            }
         }
     }
 }

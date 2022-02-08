@@ -11,12 +11,12 @@ import java.io.RandomAccessFile;
  * @Author wfh
  * @Date 2022/2/5 下午5:52
  */
-public class FIleSectionWriter {
+public class FileSectionWriter {
     private FileSectionHead fileSectionHead;
     private RandomAccessFile rafWrite;
     private byte[] fileSection;
 
-    public FIleSectionWriter() {
+    public FileSectionWriter() {
     }
 
     public void setFileSectionHead(FileSectionHead fileSectionHead) {

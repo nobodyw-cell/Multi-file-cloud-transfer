@@ -23,9 +23,7 @@ public class Test {
     @org.junit.Test
     public void test() {
         UnrecivedFileSection unrecivedFileSection = new UnrecivedFileSection(30);
-        unrecivedFileSection.receive(new OffsetLength(0,5));
-        unrecivedFileSection.receive(new OffsetLength(16,2));
-        unrecivedFileSection.receive(new OffsetLength(19,3));
+        unrecivedFileSection.receive(new OffsetLength(0,30));
         System.out.println(unrecivedFileSection.getUnreceivedlist());
     }
 

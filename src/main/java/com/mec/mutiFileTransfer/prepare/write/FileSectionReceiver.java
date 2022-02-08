@@ -20,8 +20,8 @@ public class FileSectionReceiver {
         this.dis = dis;
     }
 
-    public int getFileNo() {
-        return this.fileSectionHead.getFileNo();
+    public FileSectionHead getFileSectionHead() {
+        return fileSectionHead;
     }
 
     public byte[] getFileSection() {

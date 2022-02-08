@@ -13,6 +13,11 @@ import java.util.LinkedList;
 public class UnrecivedFileSection {
     private LinkedList<OffsetLength> unreceivedlist;
 
+    public boolean isReceiveAll() {
+        return this.unreceivedlist.size() == 0;
+    }
+
+
     public UnrecivedFileSection(int fileSize) {
         this.unreceivedlist = new LinkedList<>();
         this.unreceivedlist.add(new OffsetLength(0,fileSize));
