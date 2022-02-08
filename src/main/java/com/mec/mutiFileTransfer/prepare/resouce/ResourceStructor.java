@@ -22,9 +22,18 @@ public class ResourceStructor {
     private int index;
 
     public ResourceStructor() {
+        this.absolutePath = DEFAULT_ABSOLUTE_PATH;
         this.resourcesDirectories = new ArrayList<String>();
         this.fileList = new ArrayList<ResourceFileInfo>();
         this.index = 0;
+    }
+
+    public String getAbsolutePath() {
+        return this.absolutePath;
+    }
+
+    public ResourceFileInfo getResourceFileInfo(int fileNo) {
+        return this.fileList.get(fileNo);
     }
 
     public boolean hasNext() {
@@ -76,6 +85,7 @@ public class ResourceStructor {
                 resourceFileInfo.setFileName(file.getAbsolutePath().replace(this.absolutePath,""));
                 resourceFileInfo.setFileSize(file.length());
                 resourceFileInfo.setFileNo(ResourceStructor.temIndex++);
+                this.fileList.add(resourceFileInfo);
             }
         }
     }

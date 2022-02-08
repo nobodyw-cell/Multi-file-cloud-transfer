@@ -2,12 +2,10 @@ package com.mec.mutiFileTransfer.prepare.read;
 
 import com.mec.mutiFileTransfer.prepare.common.FileSectionHead;
 import com.mec.mutiFileTransfer.prepare.common.RandomAccessFilePool;
-import com.mec.mutiFileTransfer.prepare.resouce.ResourceFileInfo;
 import com.mec.mutiFileTransfer.prepare.resouce.ResourceFileSectionInfo;
 import com.mec.mutiFileTransfer.prepare.resouce.ResourceStructor;
 
 import java.io.DataOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
@@ -19,10 +17,17 @@ import java.io.RandomAccessFile;
  */
 public class FileSender {
     private ResourceFileSectionInfo resourceFileSectionInfo;
+    private ResourceStructor resourceStructor;
+    private RandomAccessFilePool randomAccessFilePool;
     private DataOutputStream dos;
 
-    public FileSender(DataOutputStream dos) {
+    public FileSender(ResourceFileSectionInfo resourceFileSectionInfo,
+                      ResourceStructor resourceStructor,
+                      DataOutputStream dos) {
+        this.resourceFileSectionInfo = resourceFileSectionInfo;
+        this.resourceStructor = resourceStructor;
         this.dos = dos;
+        this.randomAccessFilePool = new RandomAccessFilePool(resourceStructor);
     }
 
     public void setResourceFileInfo(ResourceFileSectionInfo resourceFileSectionInfo) {
@@ -40,7 +45,7 @@ public class FileSender {
         while (resourceFileSectionInfo.hasNext()) {
             FileSectionHead fileSectionHead = resourceFileSectionInfo.next();
             // TODO 对rafpool的处理还不够好
-            RandomAccessFile raf = RandomAccessFilePool.getRaf(fileSectionHead.getFileNo());
+            RandomAccessFile raf = this.randomAccessFilePool.getRaf(fileSectionHead.getFileNo(),"r");
             FileSectionReader fileSectionReader = new FileSectionReader();
             FileSectionSender fileSectionSender = new FileSectionSender(this.dos);
 
