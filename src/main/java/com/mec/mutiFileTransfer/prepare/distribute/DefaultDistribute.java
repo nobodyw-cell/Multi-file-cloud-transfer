@@ -45,20 +45,15 @@ public class DefaultDistribute implements IResourceStrategyDistribute {
                     FileSectionHead fileSectionHead = new FileSectionHead(resourceFileInfo.getFileNo()
                                             ,resourceFileInfo.getFileSize() - curSize,distributeSize);
 
-                    index = index++ % senderCount;
-
-                    resourceFileSectionInfoList.get(index).addFileSection(fileSectionHead);
+                    resourceFileSectionInfoList.get(index++ % senderCount).addFileSection(fileSectionHead);
                     curSize -= distributeSize;
                 }
-
             } else {
                 // 为什么这里能够进行强制转换呢,因为已经判断他小于8M了
                 OffsetLength offsetLength = new OffsetLength(0, (int) resourceFileInfo.getFileSize());
                 FileSectionHead fileSectionHead = new FileSectionHead(resourceFileInfo.getFileNo(),offsetLength);
 
-                index = index++ % senderCount;
-
-                resourceFileSectionInfoList.get(index).addFileSection(fileSectionHead);
+                resourceFileSectionInfoList.get(index++ % senderCount).addFileSection(fileSectionHead);
             }
         }
         return resourceFileSectionInfoList;

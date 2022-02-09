@@ -56,4 +56,11 @@ public class ResourceFileSectionInfo {
     public FileSectionHead next() {
         return this.fileSectionHeads.get(this.index++);
     }
+
+    @Override
+    public String toString() {
+        return "ResourceFileSectionInfo{" +
+                "fileSectionHeads=" + fileSectionHeads +
+                '}' + '\n';
+    }
 }

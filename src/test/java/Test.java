@@ -1,5 +1,7 @@
 import com.mec.mutiFileTransfer.prepare.common.OffsetLength;
 import com.mec.mutiFileTransfer.prepare.common.UnrecivedFileSection;
+import com.mec.mutiFileTransfer.prepare.distribute.DefaultDistribute;
+import com.mec.mutiFileTransfer.prepare.resouce.ResourceStructor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,9 +17,21 @@ import java.io.RandomAccessFile;
 public class Test {
 
     @org.junit.Test
+    public void testForDistribute() {
+        DefaultDistribute defaultDistribute = new DefaultDistribute();
+        ResourceStructor resourceStructor = new ResourceStructor();
+        resourceStructor.scanAbsolutePath();
+
+        System.out.println(defaultDistribute.distribute(resourceStructor, 2));
+    }
+
+    @org.junit.Test
     public void test2() {
-        System.out.println(1<<15);
-        System.out.println(32 * 1024);
+        int index = 0;
+        int sendCount = 2;
+        for (int i = 0; i < 19; i++) {
+            System.out.println(index++ % sendCount);
+        }
     }
 
     @org.junit.Test

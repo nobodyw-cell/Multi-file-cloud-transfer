@@ -44,7 +44,6 @@ public class FileSender {
 
         while (resourceFileSectionInfo.hasNext()) {
             FileSectionHead fileSectionHead = resourceFileSectionInfo.next();
-            // TODO 对rafpool的处理还不够好
             RandomAccessFile raf = this.randomAccessFilePool.getRaf(fileSectionHead.getFileNo(),"r");
             FileSectionReader fileSectionReader = new FileSectionReader();
             FileSectionSender fileSectionSender = new FileSectionSender(this.dos);

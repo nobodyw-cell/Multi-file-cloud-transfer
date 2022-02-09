@@ -1,5 +1,7 @@
 package com.mec.mutiFileTransfer.prepare.resouce;
 
+import org.junit.Test;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
  * @Date 2022/2/3 下午9:56
  */
 public class ResourceStructor {
-    public final static String DEFAULT_ABSOLUTE_PATH = "file://";
+    public final static String DEFAULT_ABSOLUTE_PATH = "/home/wfh/Pictures";
     private String ResourthId;
     private String absolutePath;
     private List<String> resourcesDirectories;

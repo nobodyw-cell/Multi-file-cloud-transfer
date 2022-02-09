@@ -27,6 +27,7 @@ public class FileSectionHead {
     public FileSectionHead() {
     }
 
+
     public FileSectionHead(int fileNo, OffsetLength offsetLength) {
         this.fileNo = fileNo;
         this.offsetLength = offsetLength;
@@ -34,8 +35,7 @@ public class FileSectionHead {
 
     public FileSectionHead(int fileNo,long offset,int length) {
         this.fileNo = fileNo;
-        this.offsetLength.setOffset(offset);
-        this.offsetLength.setLength(length);
+        this.offsetLength = new OffsetLength(offset,length);
     }
 
     public FileSectionHead(byte[] bytes) {
@@ -84,5 +84,13 @@ public class FileSectionHead {
 
     public void setOffset(long offset) {
         this.offsetLength.setOffset(offset);
+    }
+
+    @Override
+    public String toString() {
+        return "FileSectionHead{" +
+                "fileNo=" + fileNo +
+                ", offsetLength=" + offsetLength +
+                '}' + '\n';
     }
 }
