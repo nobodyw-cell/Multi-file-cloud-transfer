@@ -66,6 +66,7 @@ public class FileReceiver {
         }
 
         if  (this.unreceivedFilePool.isReceiveAll()) {
+            // TODO 接受完毕
             if (this.dis != null) {
                 try {
                     this.dis.close();
