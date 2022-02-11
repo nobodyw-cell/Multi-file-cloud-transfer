@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * //TODO add class commment here
@@ -15,6 +18,29 @@ import java.io.RandomAccessFile;
  * @Date 2022/2/5 下午6:01
  */
 public class Test {
+
+    @org.junit.Test
+    public void testForIterator() {
+        List<String> strs = new LinkedList<>();
+
+        strs.add("1");
+        strs.add("2");
+        strs.add("3");
+        strs.add("4");
+        strs.add("5");
+
+        Iterator iterator = strs.iterator();
+
+        while(iterator.hasNext()) {
+            String str = (String) iterator.next();
+
+            if (str.equals("3")) {
+                iterator.remove();
+            }
+        }
+
+        System.out.println(strs);
+    }
 
     @org.junit.Test
     public void testForDistribute() {
@@ -39,6 +65,14 @@ public class Test {
         UnrecivedFileSection unrecivedFileSection = new UnrecivedFileSection(30);
         unrecivedFileSection.receive(new OffsetLength(0,30));
         System.out.println(unrecivedFileSection.getUnreceivedlist());
+    }
+
+    public void testForCreateDic() {
+        File file = new File("/home/wfh/Pictures/test");
+
+        if (!file.exists()) {
+            file.mkdirs();
+        }
     }
 
     public static void main(String[] args) {

@@ -11,5 +11,7 @@ public interface IResourceStrategyDistribute {
      * 1024*1024*8
      */
     public static final int DEFAULT_MAX_SIZE = 1 << 23;
+    public void setMaxSize(int maxSize);
+
     public List<ResourceFileSectionInfo> distribute(ResourceStructor resourceStructor, int senderCount);
 }

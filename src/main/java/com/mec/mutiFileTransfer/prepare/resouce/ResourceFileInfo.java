@@ -12,6 +12,12 @@ public class ResourceFileInfo {
     public ResourceFileInfo() {
     }
 
+    public ResourceFileInfo(ResourceFileInfo resourceFileInfo) {
+        this.fileName = resourceFileInfo.getFileName();
+        this.fileNo = resourceFileInfo.getFileNo();
+        this.fileSize = resourceFileInfo.getFileSize();
+    }
+
     /**
      * 从零开始的连续文件编号
      */

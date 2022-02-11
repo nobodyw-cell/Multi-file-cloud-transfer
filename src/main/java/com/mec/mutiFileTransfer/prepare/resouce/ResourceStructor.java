@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,12 +24,34 @@ public class ResourceStructor {
 
     private int index;
 
+    public ResourceStructor(ResourceStructor resourceStructor) {
+        this.ResourthId = new String(resourceStructor.getResourthId());
+        this.resourcesDirectories = resourceStructor.getResourcesDirectories();
+        this.fileList = new LinkedList<>();
+
+        for (ResourceFileInfo resourceFileInfo : resourceStructor.getFileList()) {
+            ResourceFileInfo rfi = new ResourceFileInfo(resourceFileInfo);
+
+            this.fileList.add(rfi);
+        }
+    }
+
+    public List<String> getResourcesDirectories() {
+        return resourcesDirectories;
+    }
+
+    public List<ResourceFileInfo> getFileList() {
+        return fileList;
+    }
+
     public ResourceStructor() {
         this.absolutePath = DEFAULT_ABSOLUTE_PATH;
         this.resourcesDirectories = new ArrayList<String>();
         this.fileList = new ArrayList<ResourceFileInfo>();
         this.index = 0;
     }
+
+
 
     public String getAbsolutePath() {
         return this.absolutePath;
@@ -39,11 +62,21 @@ public class ResourceStructor {
     }
 
     public boolean hasNext() {
-        return this.fileList.size() > this.index;
+        if (this.fileList.size() > this.index) {
+            return true;
+        }
+
+         this.index = 0;
+        return false;
     }
 
     public ResourceFileInfo next() {
-        return this.fileList.get(this.index++);
+        if (hasNext()) {
+            return this.fileList.get(this.index++);
+        }
+        this.index = 0;
+        // TODO 越界异常
+        return null;
     }
 
     public void setResourthId(String resourthId) {

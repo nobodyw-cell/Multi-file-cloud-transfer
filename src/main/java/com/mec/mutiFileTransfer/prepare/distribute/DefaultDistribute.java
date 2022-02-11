@@ -24,6 +24,11 @@ public class DefaultDistribute implements IResourceStrategyDistribute {
     }
 
     @Override
+    public void setMaxSize(int maxSize) {
+        this.maxSize = maxSize;
+    }
+
+    @Override
     public List<ResourceFileSectionInfo> distribute(ResourceStructor resourceStructor, int senderCount) {
         long curSize = 0;
         int index = 0;
