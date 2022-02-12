@@ -6,7 +6,7 @@ package com.mec.mutiFileTransfer.util.nio;
  * @Author wfh
  * @Date 2022/2/12 下午3:20
  */
-public interface INetReader {
+public interface INetMessageProcessor {
     void dealNetMessage(byte[] message);
-    void peerAbnormalDrop();
+    void peerAbnormalDrop(BIOComunication comunication);
 }
