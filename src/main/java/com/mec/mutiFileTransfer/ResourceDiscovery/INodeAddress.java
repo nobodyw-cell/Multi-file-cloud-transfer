@@ -12,4 +12,9 @@ public interface INodeAddress {
 
     int getPort();
     String getIp();
+
+    default String toStr() {
+        return this.getIp() + ":" + this.getPort();
+    }
+
 }

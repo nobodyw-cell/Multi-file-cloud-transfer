@@ -20,6 +20,16 @@ import java.util.List;
 public class Test {
 
     @org.junit.Test
+    public void testForWhile() {
+        byte[] bytes = null;
+
+        for (int i = 0; i <10; i++) {
+            bytes = new byte[10];
+        }
+
+    }
+
+    @org.junit.Test
     public void testForIterator() {
         List<String> strs = new LinkedList<>();
 

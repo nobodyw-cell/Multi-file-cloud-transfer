@@ -23,6 +23,14 @@ public class ResourceHolder implements INodeAddress{
         return false;
     }
 
+    public int getSendedCount() {
+        return sendedCount;
+    }
+
+    public int getSendingCount() {
+        return sendingCount;
+    }
+
     public boolean isCanSend() {
         return this.canSend;
     }
@@ -51,5 +59,16 @@ public class ResourceHolder implements INodeAddress{
     @Override
     public String getIp() {
         return this.ip;
+    }
+
+    @Override
+    public String toString() {
+        return "ResourceHolder{" +
+                "ip='" + ip + '\'' +
+                ", port=" + port +
+                ", canSend=" + canSend +
+                ", sendedCount=" + sendedCount +
+                ", sendingCount=" + sendingCount +
+                '}';
     }
 }

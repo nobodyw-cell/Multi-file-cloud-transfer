@@ -37,7 +37,7 @@ public class ResourcePrepare {
 
     public ResourcePrepare() {
     }
-    
+
     /**
      * 接受之前的准备,需要完全的资源结构
      * @param orgResourceStructor
