@@ -8,5 +8,5 @@ package com.mec.mutiFileTransfer.util.nio;
  */
 public interface INetMessageProcessor {
     void dealNetMessage(byte[] message);
-    void peerAbnormalDrop(BIOComunication comunication);
+    void peerAbnormalDrop();
 }

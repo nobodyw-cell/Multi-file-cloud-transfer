@@ -24,10 +24,10 @@ public class BaseComunication {
         this.dos = new DataOutputStream(socket.getOutputStream());
     }
 
-    public String receiveString() throws IOException {
+    protected String receiveString() throws IOException {
         byte[] message = receive();
 
-        return String.valueOf(message);
+        return new String(message);
     }
 
     protected int available() {
@@ -39,7 +39,7 @@ public class BaseComunication {
         return -1;
     }
 
-    public byte[] receive() throws IOException {
+    protected byte[] receive() throws IOException {
         byte[] messageLenBytes = new byte[4];
         this.dis.read(messageLenBytes);
         int messageLen = TypeParser.bytesToInt(messageLenBytes);
