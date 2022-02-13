@@ -8,6 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * //TODO add class commment here
@@ -18,12 +19,15 @@ import java.util.List;
 public class NioServer implements Runnable, ISpeaker {
     private ServerSocket server;
     private volatile boolean goon;
+    private INetMessageProcessor processor;
     private int port;
     private List<IListener> listeners;
+    private ThreadPoolExecutor threadPool;
 
     public NioServer() {
         this.goon = false;
         this.listeners = new ArrayList<>();
+//        this.threadPool = new ThreadPoolExecutor(10,20,200,);
     }
 
     public void startUp() throws IOException {
@@ -46,6 +50,10 @@ public class NioServer implements Runnable, ISpeaker {
         this.port = port;
     }
 
+    public void setProcessor(INetMessageProcessor processor) {
+        this.processor = processor;
+    }
+
     public int getPort() {
         return port;
     }
@@ -60,6 +68,10 @@ public class NioServer implements Runnable, ISpeaker {
             try {
                 Socket client = this.server.accept();
 
+                NIOComunication comunication = new NIOComunication(client);
+                comunication.setProcessor(this.processor);
+                comunication.setThreadPool(this.threadPool);
+                // TODO 集中管理
             } catch (IOException e) {
                 if (this.goon) {
                     speak("NIO 服务器异常关闭");
