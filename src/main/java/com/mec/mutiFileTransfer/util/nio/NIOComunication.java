@@ -13,9 +13,18 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class NIOComunication extends BaseComunication implements Runnable{
     private INetMessageProcessor processor;
     private ThreadPoolExecutor threadPool;
+    private boolean isAlive;
 
     public NIOComunication(Socket socket) throws IOException {
         super(socket);
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
 
     public void setThreadPool(ThreadPoolExecutor threadPool) {
@@ -31,7 +40,7 @@ public class NIOComunication extends BaseComunication implements Runnable{
      *
      * @return
      */
-    public boolean receiveAndDeal() {
+    public boolean receiveAndDeal() throws IOException {
         int contentLen =available();
         if (contentLen > 0) {
             if (this.threadPool == null) {

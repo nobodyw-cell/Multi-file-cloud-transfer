@@ -23,10 +23,12 @@ public class NioServer implements Runnable, ISpeaker {
     private int port;
     private List<IListener> listeners;
     private ThreadPoolExecutor threadPool;
+    private NioClientPool clientPool;
 
     public NioServer() {
         this.goon = false;
         this.listeners = new ArrayList<>();
+        this.clientPool = new NioClientPool();
 //        this.threadPool = new ThreadPoolExecutor(10,20,200,);
     }
 

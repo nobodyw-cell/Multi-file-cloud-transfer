@@ -30,13 +30,8 @@ public class BaseComunication {
         return new String(message);
     }
 
-    protected int available() {
-        try {
-            return this.dis.available();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return -1;
+    protected int available() throws IOException {
+        return this.dis.available();
     }
 
     protected byte[] receive() throws IOException {
