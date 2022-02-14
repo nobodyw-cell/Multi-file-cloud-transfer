@@ -1,4 +1,6 @@
-package com.mec.mutiFileTransfer.util.nio;
+package com.mec.mutiFileTransfer.util.nio.server;
+
+import com.mec.mutiFileTransfer.util.nio.server.NIOComunication;
 
 import java.io.IOException;
 import java.util.Iterator;

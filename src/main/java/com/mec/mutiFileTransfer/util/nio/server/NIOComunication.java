@@ -1,4 +1,7 @@
-package com.mec.mutiFileTransfer.util.nio;
+package com.mec.mutiFileTransfer.util.nio.server;
+
+import com.mec.mutiFileTransfer.util.nio.common.BaseComunication;
+import com.mec.mutiFileTransfer.util.nio.common.INetMessageProcessor;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -13,18 +16,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class NIOComunication extends BaseComunication implements Runnable{
     private INetMessageProcessor processor;
     private ThreadPoolExecutor threadPool;
-    private boolean isAlive;
 
     public NIOComunication(Socket socket) throws IOException {
         super(socket);
-    }
-
-    public boolean isAlive() {
-        return isAlive;
-    }
-
-    public void setAlive(boolean alive) {
-        isAlive = alive;
     }
 
     public void setThreadPool(ThreadPoolExecutor threadPool) {

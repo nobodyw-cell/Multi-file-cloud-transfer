@@ -1,9 +1,8 @@
-package com.mec.mutiFileTransfer.util.nio;
+package com.mec.mutiFileTransfer.util.nio.common;
 
-import com.mec.mutiFileTransfer.util.TypeParser;
+import com.mec.mutiFileTransfer.util.nio.common.BaseComunication;
+import com.mec.mutiFileTransfer.util.nio.common.INetMessageProcessor;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 

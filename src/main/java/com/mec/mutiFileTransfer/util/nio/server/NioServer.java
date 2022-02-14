@@ -1,7 +1,8 @@
-package com.mec.mutiFileTransfer.util.nio;
+package com.mec.mutiFileTransfer.util.nio.server;
 
 import com.mec.mutiFileTransfer.util.IListener;
 import com.mec.mutiFileTransfer.util.ISpeaker;
+import com.mec.mutiFileTransfer.util.nio.common.INetMessageProcessor;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -42,7 +43,7 @@ public class NioServer implements Runnable, ISpeaker {
         this.goon = true;
 
         this.server = new ServerSocket(this.port);
-
+        this.clientPool.scan();
         speak("NIO 服务器启动成功,正在监听端口请求");
         new Thread(this).start();
     }
@@ -70,10 +71,15 @@ public class NioServer implements Runnable, ISpeaker {
             try {
                 Socket client = this.server.accept();
 
+                String clientIp = client.getInetAddress().getHostAddress();
+
+                speak("客户端[" + clientIp + "]请求连接");
+
                 NIOComunication comunication = new NIOComunication(client);
                 comunication.setProcessor(this.processor);
                 comunication.setThreadPool(this.threadPool);
-                // TODO 集中管理
+
+                this.clientPool.addClient(comunication);
             } catch (IOException e) {
                 if (this.goon) {
                     speak("NIO 服务器异常关闭");
@@ -83,6 +89,8 @@ public class NioServer implements Runnable, ISpeaker {
                 }
             }
         }
+
+        this.clientPool.stopScan();
     }
 
     @Override

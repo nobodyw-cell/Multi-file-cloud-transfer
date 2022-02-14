@@ -1,4 +1,4 @@
-package com.mec.mutiFileTransfer.util.nio;
+package com.mec.mutiFileTransfer.util.nio.common;
 
 /**
  * //TODO add interface commment here

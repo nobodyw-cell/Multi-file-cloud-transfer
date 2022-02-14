@@ -1,4 +1,4 @@
-package com.mec.mutiFileTransfer.util.nio;
+package com.mec.mutiFileTransfer.util.nio.common;
 
 import com.mec.mutiFileTransfer.util.TypeParser;
 
