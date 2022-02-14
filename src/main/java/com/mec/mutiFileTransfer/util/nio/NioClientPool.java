@@ -16,6 +16,9 @@ public class NioClientPool implements Runnable{
     public static final int DEFAULT_MAX_COUNT = 10;
     private List<NIOComunication> clientList;
     private ThreadPoolExecutor threadPoolExecutor;
+    private static final byte[] ASK = new byte[] {
+            (byte)0xFF,(byte)0xFF,(byte)0xFF,(byte)0xFF
+    };
     private volatile boolean goon;
     private int maxCount;
     private int count;
@@ -79,11 +82,19 @@ public class NioClientPool implements Runnable{
 
                 try {
                     client.receiveAndDeal();
+                    if (this.count++ > this.maxCount) {
+                        this.count = 0;
+                        hearBeat(client);
+                    }
                 } catch (IOException e) {
                     iterator.remove();
                 }
             }
         }
+    }
+
+    private void hearBeat(NIOComunication nioComunication) throws IOException {
+        nioComunication.send(ASK);
     }
 }
 

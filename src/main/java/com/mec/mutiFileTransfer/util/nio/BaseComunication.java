@@ -54,20 +54,21 @@ public class BaseComunication {
     }
 
     public void send(String message) {
-        send(message.getBytes());
+        try {
+            send(message.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void send(byte[] message) {
+    public void send(byte[] message) throws IOException {
         int messageLen = message.length;
 
         byte[] lenBytes = TypeParser.toBytes(messageLen);
 
-        try {
-            this.dos.write(lenBytes);
-            this.dos.write(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.dos.write(lenBytes);
+        this.dos.write(message);
+
     }
 
 
