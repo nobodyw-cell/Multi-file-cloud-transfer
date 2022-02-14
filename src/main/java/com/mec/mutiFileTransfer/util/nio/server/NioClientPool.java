@@ -31,6 +31,10 @@ public class NioClientPool implements Runnable{
         this.count = 0;
     }
 
+    public int getClientCount() {
+        return this.clientList.size();
+    }
+
     /**
      * 设置每几次轮询过后做心跳检测
      * @param maxCount

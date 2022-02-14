@@ -50,7 +50,8 @@ public class NioClient{
     }
 
     public void close() {
-        this.comunication.close();
+        if (this.comunication != null) {
+            this.comunication.close();}
     }
 
     /**

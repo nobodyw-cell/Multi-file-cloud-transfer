@@ -18,6 +18,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @Date 2022/2/12 下午1:10
  */
 public class NioServer implements Runnable, ISpeaker {
+    public static final int DEFAULT_PORT = 54188;
     private ServerSocket server;
     private volatile boolean goon;
     private INetMessageProcessor processor;
@@ -43,14 +44,51 @@ public class NioServer implements Runnable, ISpeaker {
         this.goon = true;
 
         this.server = new ServerSocket(this.port);
-        this.clientPool.scan();
         speak("NIO 服务器启动成功,正在监听端口请求");
+        this.clientPool.scan();
         new Thread(this).start();
+    }
+
+    public boolean isStartUp() {
+        return this.goon;
     }
 
     public NioServer(int port) {
         this();
         this.port = port;
+    }
+
+    /**
+     * 得先清空pool
+     */
+    public void shutDown() {
+        if (this.goon = false) {
+            speak("服务器已宕机不能重复宕机");
+            return;
+        }
+
+        if (this.clientPool.getClientCount() > 0) {
+            speak("还有客户存在不能宕机");
+            return;
+        }
+
+        this.clientPool.stopScan();
+        close();
+        speak("服务器关闭成功");
+    }
+
+    private void close() {
+        this.goon = false;
+
+        if (this.server != null && !this.server.isClosed()) {
+            try {
+                this.server.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                this.server = null;
+            }
+        }
     }
 
     public void setProcessor(INetMessageProcessor processor) {

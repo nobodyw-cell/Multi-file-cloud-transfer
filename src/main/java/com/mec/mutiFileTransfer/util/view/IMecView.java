@@ -21,15 +21,17 @@ public interface IMecView {
     public void afterShowView();
     public void dealAction();
     public RootPaneContainer getFrame();
+    public boolean beforeCloseView();
+    public void afterCloseView();
+    public void beforeShowView();
 
-    default void beforeCloseView() {};
-    default void afterCloseView() {};
     default IMecView initView() {
         init();
         dealAction();
         return this;
     }
     default void showView()  {
+        beforeShowView();
         RootPaneContainer rootPaneContainer =getFrame();
 
         if (rootPaneContainer instanceof Frame) {
@@ -41,9 +43,11 @@ public interface IMecView {
     }
 
     default void closeView() {
-        RootPaneContainer rootPaneContainer = getFrame();
+        if (beforeCloseView() == false) {
+            return;
+        }
 
-        beforeCloseView();
+        RootPaneContainer rootPaneContainer = getFrame();
         if (rootPaneContainer instanceof Frame) {
             ((Frame) rootPaneContainer).dispose();
         } else {
