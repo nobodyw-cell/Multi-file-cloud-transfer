@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.net.Socket;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,12 +22,11 @@ public class Test {
 
     @org.junit.Test
     public void testForWhile() {
-        byte[] bytes = null;
-
-        for (int i = 0; i <10; i++) {
-            bytes = new byte[10];
+        try {
+            new Socket("127.0.0.1",54188);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 
     @org.junit.Test

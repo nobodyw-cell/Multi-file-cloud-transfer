@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 
 /**
  * //TODO add class commment here
@@ -28,10 +28,16 @@ public class NioServer implements Runnable, ISpeaker {
     private NioClientPool clientPool;
 
     public NioServer() {
+        this.port = DEFAULT_PORT;
         this.goon = false;
         this.listeners = new ArrayList<>();
         this.clientPool = new NioClientPool();
-//        this.threadPool = new ThreadPoolExecutor(10,20,200,);
+        this.threadPool = new ThreadPoolExecutor(10,
+                20,
+                10,
+                TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>());
+        this.clientPool.setThreadPoolExecutor(this.threadPool);
     }
 
     public void startUp() throws IOException {
@@ -44,7 +50,7 @@ public class NioServer implements Runnable, ISpeaker {
         this.goon = true;
 
         this.server = new ServerSocket(this.port);
-        speak("NIO 服务器启动成功,正在监听端口请求");
+        speak("NIO 服务器启动成功");
         this.clientPool.scan();
         new Thread(this).start();
     }
@@ -73,6 +79,9 @@ public class NioServer implements Runnable, ISpeaker {
         }
 
         this.clientPool.stopScan();
+
+        this.threadPool.shutdownNow();
+
         close();
         speak("服务器关闭成功");
     }
@@ -105,6 +114,7 @@ public class NioServer implements Runnable, ISpeaker {
 
     @Override
     public void run() {
+        speak("正在监听端口,等待客户连接...");
         while (this.goon) {
             try {
                 Socket client = this.server.accept();

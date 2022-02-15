@@ -128,6 +128,8 @@ public class ServerView implements IMecView, IListener {
             }
         } else if (command.equals("shutDown")) {
             this.server.shutDown();
+        } else {
+            this.server.speak("命令不可识别");
         }
     }
 

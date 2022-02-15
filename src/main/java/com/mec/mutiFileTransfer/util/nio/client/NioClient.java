@@ -1,7 +1,6 @@
 package com.mec.mutiFileTransfer.util.nio.client;
 
 import com.mec.mutiFileTransfer.util.nio.common.BIOComunication;
-import com.mec.mutiFileTransfer.util.nio.common.INetMessageProcessor;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -33,12 +32,14 @@ public class NioClient{
         if (this.connectted == true) {
             return;
         }
+
+        System.out.println("正在连接至服务器" + this.ip + ":" + this.port);
         this.socket = new Socket(ip, port);
+        System.out.println(this.socket);
         this.comunication = new Communication(socket);
         this.comunication.setProcessor(this.conversation);
-
-        this.comunication.startUp();
         this.connectted = true;
+        this.comunication.startUp();
     }
 
     public void setIp(String ip) {

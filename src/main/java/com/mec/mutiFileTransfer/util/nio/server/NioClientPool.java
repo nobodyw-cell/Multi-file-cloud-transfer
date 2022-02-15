@@ -21,7 +21,7 @@ public class NioClientPool implements Runnable{
     private static final byte[] ASK = new byte[] {
             (byte)0xFF,(byte)0xFF,(byte)0xFF,(byte)0xFF
     };
-    private volatile boolean goon;
+    private volatile boolean isScanning;
     private int maxCount;
     private int count;
 
@@ -57,17 +57,17 @@ public class NioClientPool implements Runnable{
     }
 
     public void scan() {
-        if (this.goon == true) {
+        if (this.isScanning == true) {
             return;
         }
 
-        this.goon = true;
+        this.isScanning = true;
 
         this.threadPoolExecutor.execute(this);
     }
 
     public void stopScan() {
-        this.goon = false;
+        this.isScanning = false;
     }
 
     /**
@@ -76,7 +76,7 @@ public class NioClientPool implements Runnable{
      */
     @Override
     public void run() {
-        while (this.goon) {
+        while (this.isScanning) {
             if (this.clientList.isEmpty()) {
                 continue;
             }
