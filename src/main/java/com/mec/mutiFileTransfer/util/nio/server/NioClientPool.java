@@ -80,6 +80,9 @@ public class NioClientPool implements Runnable{
             if (this.clientList.isEmpty()) {
                 continue;
             }
+            if (this.count++ > this.maxCount) {
+                this.count = 0;
+            }
 
             Iterator<NIOComunication> iterator = this.clientList.iterator();
 
@@ -88,8 +91,7 @@ public class NioClientPool implements Runnable{
 
                 try {
                     client.receiveAndDeal();
-                    if (this.count++ > this.maxCount) {
-                        this.count = 0;
+                    if (this.count == 0) {
                         hearBeat(client);
                     }
                 } catch (IOException e) {

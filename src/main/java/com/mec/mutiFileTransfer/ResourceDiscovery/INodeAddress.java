@@ -16,5 +16,4 @@ public interface INodeAddress {
     default String toStr() {
         return this.getIp() + ":" + this.getPort();
     }
-
 }

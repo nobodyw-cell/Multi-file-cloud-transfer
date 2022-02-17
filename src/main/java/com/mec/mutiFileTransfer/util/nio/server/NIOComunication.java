@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * //TODO add class commment here
+ * 处理NIO的通信,当有消息来的时候会开启一个线程去接收信息并处理
  *
  * @Author wfh
  * @Date 2022/2/12 下午9:38
@@ -54,7 +54,7 @@ public class NIOComunication extends BaseComunication implements Runnable{
             byte[] message = receive();
             this.processor.dealNetMessage(message);
         } catch (IOException e) {
-            // 接收的时候对端掉线
+            // TODO 接收的时候对端掉线
             this.processor.peerAbnormalDrop();
         }
     }

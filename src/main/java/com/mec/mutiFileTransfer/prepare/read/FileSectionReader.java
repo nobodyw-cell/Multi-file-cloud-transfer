@@ -6,7 +6,12 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 /**
- * //TODO add class commment here
+ * 根据设置进去的FileSectioHead读取数据
+ *
+ * 这里的设计感觉有点冗余
+ * 1. FileSectionReader这个东西可不可重用要是可以重用的话直接构造方法里边加东西不就完了.
+ * 2. rafRead 和 fileSectionHead 和fileSection都不应该作为成员出现
+ * 3. 也就是说这个类其实可以浓缩为一个方法就行了
  *
  * @Author wfh
  * @Date 2022/2/5 下午5:51

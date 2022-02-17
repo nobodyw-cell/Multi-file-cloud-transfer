@@ -24,12 +24,6 @@ public class BaseComunication {
         this.dos = new DataOutputStream(socket.getOutputStream());
     }
 
-    protected String receiveString() throws IOException {
-        byte[] message = receive();
-
-        return new String(message);
-    }
-
     protected int available() throws IOException {
         return this.dis.available();
     }
@@ -51,14 +45,6 @@ public class BaseComunication {
         }
 
         return message;
-    }
-
-    public void send(String message) {
-        try {
-            send(message.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void send(byte[] message) throws IOException {
