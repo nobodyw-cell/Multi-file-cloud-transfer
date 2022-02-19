@@ -6,9 +6,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 
 /**
- * //TODO add class commment here
+ * 怎么不做成真的nio,有什么区别呢,教主的这种和真的有什么区别呢
+ *
+ * 如果阻塞不耗时维护这个线程又如何
  *
  * @Author wfh
  * @Date 2022/2/12 下午9:26
@@ -92,3 +95,9 @@ public class BaseComunication {
     }
 
 }
+
+/**
+ * 传统的BIO里面socket.read()，如果TCP RecvBuffer里没有数据，函数会一直阻塞，直到收到数据，返回读到的数据。
+ * 对于NIO，如果TCP RecvBuffer有数据，就把数据从网卡读到内存，并且返回给用户；反之则直接返回0，永远不会阻塞。
+ * AIO(Async I/O)里面会更进一步：不但等待就绪是非阻塞的，就连数据从网卡到内存的过程也是异步的。
+ */

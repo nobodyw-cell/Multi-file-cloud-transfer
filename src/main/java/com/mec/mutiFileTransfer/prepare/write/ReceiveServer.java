@@ -49,6 +49,9 @@ public class ReceiveServer implements Runnable {
         this.port = port;
     }
 
+    /**
+     * 这里应该考虑到超时问题
+     */
     @Override
     public void run() {
         int sender = 0;
