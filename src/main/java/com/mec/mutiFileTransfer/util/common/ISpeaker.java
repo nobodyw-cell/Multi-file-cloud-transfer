@@ -1,4 +1,6 @@
-package com.mec.mutiFileTransfer.util;
+package com.mec.mutiFileTransfer.util.common;
+
+import com.mec.mutiFileTransfer.util.common.IListener;
 
 /**
  * //TODO add interface commment here

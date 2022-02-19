@@ -1,7 +1,7 @@
 package com.mec.mutiFileTransfer.util.nio.server;
 
-import com.mec.mutiFileTransfer.util.IListener;
-import com.mec.mutiFileTransfer.util.ISpeaker;
+import com.mec.mutiFileTransfer.util.common.IListener;
+import com.mec.mutiFileTransfer.util.common.ISpeaker;
 import com.mec.mutiFileTransfer.util.nio.common.INetMessageProcessor;
 
 import java.io.IOException;

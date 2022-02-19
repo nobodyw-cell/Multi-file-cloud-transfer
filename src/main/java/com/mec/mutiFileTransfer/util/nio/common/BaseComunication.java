@@ -1,12 +1,11 @@
 package com.mec.mutiFileTransfer.util.nio.common;
 
-import com.mec.mutiFileTransfer.util.TypeParser;
+import com.mec.mutiFileTransfer.util.common.TypeParser;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.nio.ByteBuffer;
 
 /**
  * 怎么不做成真的nio,有什么区别呢,教主的这种和真的有什么区别呢

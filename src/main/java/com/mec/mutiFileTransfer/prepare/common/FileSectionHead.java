@@ -1,6 +1,6 @@
 package com.mec.mutiFileTransfer.prepare.common;
 
-import com.mec.mutiFileTransfer.util.TypeParser;
+import com.mec.mutiFileTransfer.util.common.TypeParser;
 
 /**
  * //TODO add class commment here

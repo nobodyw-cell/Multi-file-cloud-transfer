@@ -1,6 +1,6 @@
 package com.mec.mutiFileTransfer.nio.server.view;
 
-import com.mec.mutiFileTransfer.util.IListener;
+import com.mec.mutiFileTransfer.util.common.IListener;
 import com.mec.mutiFileTransfer.util.nio.common.INetMessageProcessor;
 import com.mec.mutiFileTransfer.util.nio.server.NioServer;
 import com.mec.mutiFileTransfer.util.view.IMecView;

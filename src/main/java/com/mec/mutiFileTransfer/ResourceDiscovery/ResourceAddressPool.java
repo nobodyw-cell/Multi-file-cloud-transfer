@@ -3,7 +3,8 @@ package com.mec.mutiFileTransfer.ResourceDiscovery;
 import java.util.*;
 
 /**
- * //TODO add class commment here
+ * resource和address多对多双向绑定
+ * 这样的话可以通过 resource找到holder 也可以通过holder找到他有那些resource0
  *
  * @Author wfh
  * @Date 2022/2/19 下午3:39
@@ -33,6 +34,16 @@ public class ResourceAddressPool {
     }
 
     /**
+     * 得到资源拥有者列表
+     *
+     * @param resourceId
+     * @return
+     */
+    List<ResourceHolder> getResourceHolders(String resourceId) {
+        return resourceToHolderPool.get(resourceId);
+    }
+
+    /**
      * 删除拥有者地址
      * @param resourceHolder
      */
@@ -40,7 +51,18 @@ public class ResourceAddressPool {
         List<String> resources = holderToResourcePool.get(resourceHolder);
 
         if (resources == null) {
-            
+            return;
+        }
+
+        holderToResourcePool.remove(resourceHolder);
+
+        synchronized (resourceToHolderPool) {
+            for (String resource : resources) {
+                List<ResourceHolder> holders = resourceToHolderPool.get(resource);
+
+                holders.remove(resourceHolder);
+            }
+
         }
     }
 
@@ -87,7 +109,8 @@ public class ResourceAddressPool {
 
         if (holders == null) {
             /**
-             * 在谁的作用域内就可以锁住谁
+             * synchronized里的参数实际上是获取锁的地方
+             * 只有这个锁可以被获得(未被其他线程中的代码段占用)才可以进入这一代码段
              */
             synchronized (resourceToHolderPool) {
                 holders = resourceToHolderPool.get(resourceId);
@@ -102,5 +125,4 @@ public class ResourceAddressPool {
         holders.add(resourceHolder);
     }
 
-    void removeholder(String resourceId,ResourceHolder resourceHolder) {}
 }
