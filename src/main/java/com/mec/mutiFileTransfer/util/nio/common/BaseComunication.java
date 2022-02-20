@@ -30,7 +30,7 @@ public class BaseComunication {
         return this.dis.available();
     }
 
-    protected byte[] receive() throws IOException {
+    public byte[] receive() throws IOException {
         byte[] messageLenBytes = new byte[4];
         this.dis.read(messageLenBytes);
         int messageLen = TypeParser.bytesToInt(messageLenBytes);

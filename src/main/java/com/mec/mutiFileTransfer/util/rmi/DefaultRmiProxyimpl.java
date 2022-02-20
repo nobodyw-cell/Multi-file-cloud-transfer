@@ -1,6 +1,8 @@
 package com.mec.mutiFileTransfer.util.rmi;
 
 import com.mec.mutiFileTransfer.ResourceDiscovery.INodeAddress;
+import com.mec.mutiFileTransfer.util.common.ArgumentPackager;
+import com.mec.mutiFileTransfer.util.view.Say;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -34,7 +36,18 @@ public class DefaultRmiProxyimpl implements RmiProxyImpl {
      */
     @Override
     public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
-        this.rmiClient.
-        return null;
+        this.rmiClient.connectToServer();
+        ArgumentPackager argumentPackager = new ArgumentPackager(o,method,objects);
+        System.out.println(argumentPackager);
+        this.rmiClient.sendArgu(ArgumentPackager.gson.toJson(argumentPackager));
+
+        String result = this.rmiClient.receiveResult();
+
+        Object object = ArgumentPackager.gson.fromJson(result,o.getClass());
+        return object;
     }
 }
+
+/**
+ * 为什么Method的hashcode不考虑重载
+ */
