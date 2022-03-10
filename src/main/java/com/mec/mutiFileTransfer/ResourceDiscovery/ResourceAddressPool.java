@@ -1,5 +1,8 @@
 package com.mec.mutiFileTransfer.ResourceDiscovery;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 
 /**
@@ -9,7 +12,7 @@ import java.util.*;
  * @Author wfh
  * @Date 2022/2/19 下午3:39
  */
-public class ResourceAddressPool {
+public class ResourceAddressPool extends UnicastRemoteObject implements IResourceHaver,IResourceRequester{
     /**
      * 根据一个resourceId得到资源拥有者列表
      */
@@ -30,7 +33,27 @@ public class ResourceAddressPool {
         resourceToHolderPool = new HashMap<>();
     }
 
-    public ResourceAddressPool() {
+    protected ResourceAddressPool() throws RemoteException {
+    }
+
+    @Override
+    public void resourceRegistry(String resourceId, ResourceHolder address) {
+        RegistResourceAddress(resourceId,address);
+    }
+
+    @Override
+    public void resourceDestroy(ResourceHolder address) {
+        removeAddress(address);
+    }
+
+    @Override
+    public List<ResourceHolder> getAddressList(String resourceId) {
+        return getResourceHolders(resourceId);
+    }
+
+    @Override
+    public void deleteResourceRecord(ResourceHolder resourceHolder) {
+        removeAddress(resourceHolder);
     }
 
     /**
@@ -95,6 +118,8 @@ public class ResourceAddressPool {
 
         resources.add(resourceId);
     }
+
+
 
     /**
      * 注册资源拥有者地址

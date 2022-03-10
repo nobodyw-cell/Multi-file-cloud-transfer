@@ -1,21 +1,30 @@
 package com.mec.mutiFileTransfer.Rmi;
 
-import com.mec.mutiFileTransfer.ResourceDiscovery.NodeAddress;
+import com.mec.mutiFileTransfer.util.rmi.RMIClient;
+import com.mec.mutiFileTransfer.util.rmi.RMIServer;
 import com.mec.mutiFileTransfer.util.rmi.RmiClient;
-import com.mec.mutiFileTransfer.util.view.ISay;
-import com.mec.mutiFileTransfer.util.view.Say;
+
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 /**
- * //TODO add class commment here
+ * port是可以指定的
  *
  * @Author wfh
  * @Date 2022/2/20 下午3:11
  */
 public class ClientTest {
     public static void main(String[] args) {
-        RmiClient rmiClient = new RmiClient(new NodeAddress("127.0.0.1",54188));
-        ISay say = rmiClient.getRmiProxy(Say.class);
+        RMIClient rmiClient = new RMIClient();
 
-        System.out.println(say.say());
+        IRMIMath rmiMath = rmiClient.getProxy("compute");
+
+        try {
+            System.out.println(rmiMath.add(3,7));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,25 +1,48 @@
 package com.mec.mutiFileTransfer.Rmi;
 
-import com.mec.mutiFileTransfer.util.rmi.RmiServer;
+import com.mec.mutiFileTransfer.util.common.IListener;
+import com.mec.mutiFileTransfer.util.rmi.RMIServer;
 
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
- * //TODO add class commment here
+ * 分析和自己比如何
+ *
+ * 这里的取舍真的是一种很棒的设计
+ * 1. 没有过于严格的要求用户
+ * 2. 减少开发难度
+ * 3. 增加了灵活性
+ *
+ *
+ * 不过要是自己真的用spring做一个rmi肯定会更好用一些.
  *
  * @Author wfh
  * @Date 2022/2/20 下午3:11
  */
 public class ServerTest {
     public static void main(String[] args) {
-        RmiServer rmiServer = new RmiServer(54188,new ThreadPoolExecutor(10,
-                20,
-                10,
-                TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>()));
+        RMIServer rmiServer = new RMIServer();
+
+        IListener listener = new IListener() {
+            @Override
+            public void messageFromSpeaker(String message) {
+                System.out.println(message);
+            }
+        };
+
+        rmiServer.addListenner(listener);
 
         rmiServer.startUp();
+
+        try {
+            rmiServer.bind("compute",new RMIMathImpl());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 }
