@@ -12,7 +12,9 @@ import java.net.Socket;
 import java.util.List;
 
 /**
- * //TODO add class commment here
+ * 文件接收服务器
+ *
+ * 指定端口后通过start即可开启服务
  *
  * @Author wfh
  * @Date 2022/2/8 下午9:41

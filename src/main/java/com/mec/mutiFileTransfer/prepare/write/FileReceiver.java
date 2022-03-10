@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 /**
- * //TODO add class commment here
+ * 完成对一个服务器的接收工作
  *
  * @Author wfh
  * @Date 2022/2/7 下午8:55

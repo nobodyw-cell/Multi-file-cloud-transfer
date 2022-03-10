@@ -3,7 +3,11 @@ package com.mec.mutiFileTransfer.prepare.common;
 import com.mec.mutiFileTransfer.util.common.TypeParser;
 
 /**
- * //TODO add class commment here
+ * 对文件片段的描述
+ * 包含 文件编号,文件片段的offset和length
+ * <p/>
+ * 可以将所包含的信息转换为大小为HEAD_LEN的字节数组.
+ * 可以由大小为HEAD_LEN的字节数组转变为这个类的对象
  *
  * @Author wfh
  * @Date 2022/2/2 下午4:07

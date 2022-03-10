@@ -17,3 +17,4 @@ public class Say implements ISay {
         return str;
     }
 }
+

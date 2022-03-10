@@ -5,7 +5,9 @@ import com.mec.mutiFileTransfer.prepare.common.OffsetLength;
 import java.util.LinkedList;
 
 /**
- * //TODO add class commment here
+ * 针对单个文件将已接收到的数据做统计,方便以后的断点续传
+ * 但这里还需要优化,暂时用不上这个
+ * 也就是说断点续传的粒度还不够细.
  *
  * @Author wfh
  * @Date 2022/2/3 下午10:58

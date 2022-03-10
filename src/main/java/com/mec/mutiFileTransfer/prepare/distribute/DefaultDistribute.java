@@ -10,7 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * //TODO add class commment here
+ * 分配策略接口的默认实现
+ * 这里我是根据一个ResourceStructor做一个分配
+ * 将其中所有文件大于8M划分成小部分,小于8M直接分配
+ *
+ * 这里做的不是很好将来可能需要更改.
  *
  * @Author wfh
  * @Date 2022/2/4 下午10:26

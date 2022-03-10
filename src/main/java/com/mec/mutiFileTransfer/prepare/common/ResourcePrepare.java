@@ -7,8 +7,6 @@ import com.mec.mutiFileTransfer.prepare.resouce.ResourceFileSectionInfo;
 import com.mec.mutiFileTransfer.prepare.resouce.ResourceStructor;
 
 import java.io.File;
-import java.io.IOException;
-import java.sql.ClientInfoStatus;
 import java.util.Iterator;
 import java.util.List;
 
@@ -91,7 +89,6 @@ public class ResourcePrepare {
             }
         }
     }
-
 
     private void creatDir(ResourceStructor orgResourceStructor) {
         List<String> dirs = orgResourceStructor.getResourcesDirectories();

@@ -8,7 +8,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * //TODO add class commment here
+ * 资源结构的整体描述
+ *
+ * 含有
+ * 1. 资源的绝对路径
+ * 2. 资源id
+ * 3. 资源的目录结构 (相对路径)
+ * 4. 资源文件名称以及结构 (相对路径)
+ *
  *
  * @Author wfh
  * @Date 2022/2/3 下午9:56
@@ -20,8 +27,14 @@ public class ResourceStructor {
     private List<String> resourcesDirectories;
     private List<ResourceFileInfo> fileList;
 
+    /**
+     * 对文件做一个编号
+     */
     private static int temIndex;
 
+    /**
+     * 游标
+     */
     private int index;
 
     public ResourceStructor(ResourceStructor resourceStructor) {
@@ -50,8 +63,6 @@ public class ResourceStructor {
         this.fileList = new ArrayList<ResourceFileInfo>();
         this.index = 0;
     }
-
-
 
     public String getAbsolutePath() {
         return this.absolutePath;
@@ -91,6 +102,9 @@ public class ResourceStructor {
         this.absolutePath = absolutePath;
     }
 
+    /**
+     * 扫描绝对路径得到资源结构.
+     */
     public void scanAbsolutePath() {
         File rootFile = new File(this.absolutePath);
 

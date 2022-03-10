@@ -1,7 +1,7 @@
 package com.mec.mutiFileTransfer.prepare.common;
 
 /**
- * //TODO add class commment here
+ *  描述文件片段在文件中的偏移量以及长度.
  *
  * @Author wfh
  * @Date 2022/2/2 下午4:09

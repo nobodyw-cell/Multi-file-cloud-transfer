@@ -3,7 +3,13 @@ package com.mec.mutiFileTransfer.prepare.resouce;
 import java.util.Objects;
 
 /**
- * //TODO add class commment here
+ * 对resource的描述
+ *
+ * 由资源的以下部分构成
+ * 1. 资源id
+ * 2. 资源头部
+ * 3. 资源简介
+ * 4. 资源详细介绍
  *
  * @Author wfh
  * @Date 2022/2/3 下午9:55
