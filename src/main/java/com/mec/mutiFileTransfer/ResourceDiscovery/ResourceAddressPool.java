@@ -12,11 +12,11 @@ import java.util.*;
  * @Author wfh
  * @Date 2022/2/19 下午3:39
  */
-public class ResourceAddressPool extends UnicastRemoteObject implements IResourceHaver,IResourceRequester{
+public class ResourceAddressPool extends UnicastRemoteObject implements IResourceRequester{
     /**
      * 根据一个resourceId得到资源拥有者列表
      */
-    private static final Map<String, List<ResourceHolder>> resourceToHolderPool;
+    private static final Map<String, ArrayList<ResourceHolder>> resourceToHolderPool;
 
     /**
      * 根据一个资源拥有者的地址,得到他所拥有的所有资源
@@ -33,21 +33,11 @@ public class ResourceAddressPool extends UnicastRemoteObject implements IResourc
         resourceToHolderPool = new HashMap<>();
     }
 
-    protected ResourceAddressPool() throws RemoteException {
+    public ResourceAddressPool() throws RemoteException {
     }
 
     @Override
-    public void resourceRegistry(String resourceId, ResourceHolder address) {
-        RegistResourceAddress(resourceId,address);
-    }
-
-    @Override
-    public void resourceDestroy(ResourceHolder address) {
-        removeAddress(address);
-    }
-
-    @Override
-    public List<ResourceHolder> getAddressList(String resourceId) {
+    public ArrayList<ResourceHolder> getAddressList(String resourceId) {
         return getResourceHolders(resourceId);
     }
 
@@ -62,7 +52,7 @@ public class ResourceAddressPool extends UnicastRemoteObject implements IResourc
      * @param resourceId
      * @return
      */
-    List<ResourceHolder> getResourceHolders(String resourceId) {
+    ArrayList<ResourceHolder> getResourceHolders(String resourceId) {
         return resourceToHolderPool.get(resourceId);
     }
 
@@ -130,7 +120,7 @@ public class ResourceAddressPool extends UnicastRemoteObject implements IResourc
      * @param resourceHolder
      */
     private void RegistAddress(String resourceId,ResourceHolder resourceHolder) {
-        List<ResourceHolder> holders = resourceToHolderPool.get(resourceId);
+        ArrayList<ResourceHolder> holders = resourceToHolderPool.get(resourceId);
 
         if (holders == null) {
             /**

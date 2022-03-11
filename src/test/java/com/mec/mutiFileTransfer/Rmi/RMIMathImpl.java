@@ -2,6 +2,7 @@ package com.mec.mutiFileTransfer.Rmi;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 /**
  * //TODO add class commment here
@@ -11,16 +12,18 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class RMIMathImpl extends UnicastRemoteObject implements IRMIMath {
 
-    protected RMIMathImpl() throws RemoteException {
+    public RMIMathImpl() throws RemoteException {
     }
 
     @Override
-    public double add(int a, int b) throws RemoteException {
+    public ArrayList<Double> add(int a, int b) throws RemoteException {
+        ArrayList<Double> arrayList = new ArrayList<>();
         int sum = a + b;
 
         System.out.println("结果是" + sum);
 
+        arrayList.add((double) sum);
 
-        return sum;
+        return arrayList;
     }
 }

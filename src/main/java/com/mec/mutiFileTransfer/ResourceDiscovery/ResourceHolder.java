@@ -1,12 +1,15 @@
 package com.mec.mutiFileTransfer.ResourceDiscovery;
 
+import java.io.Serializable;
+import java.rmi.Remote;
+
 /**
  * //TODO add class commment here
  *
  * @Author wfh
  * @Date 2022/2/11 下午8:48
  */
-public class ResourceHolder implements INodeAddress{
+public class ResourceHolder implements INodeAddress, Serializable {
     private String ip;
     private int port;
 

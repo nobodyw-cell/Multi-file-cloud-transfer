@@ -1,5 +1,7 @@
 package com.mec.mutiFileTransfer.Rmi;
 
+import com.mec.mutiFileTransfer.ResourceDiscovery.ResourceAddressPool;
+import com.mec.mutiFileTransfer.ResourceDiscovery.ResourceHolder;
 import com.mec.mutiFileTransfer.util.common.IListener;
 import com.mec.mutiFileTransfer.util.rmi.RMIServer;
 
@@ -41,6 +43,19 @@ public class ServerTest {
 
         try {
             rmiServer.bind("compute",new RMIMathImpl());
+
+
+            ResourceAddressPool resourceAddressPool = new ResourceAddressPool();
+            ResourceHolder resourceHolder = new ResourceHolder();
+
+            resourceHolder.setIp("local");
+            resourceHolder.setPort(102343);
+            resourceAddressPool.RegistResourceAddress("com.linux",resourceHolder);
+
+            rmiServer.bind("com",resourceAddressPool);
+
+
+            rmiServer.bind("IResourceRequester",new ResourceAddressPool());
         } catch (RemoteException e) {
             e.printStackTrace();
         }

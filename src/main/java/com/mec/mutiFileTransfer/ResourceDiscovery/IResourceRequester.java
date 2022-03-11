@@ -1,7 +1,8 @@
 package com.mec.mutiFileTransfer.ResourceDiscovery;
 
 import java.rmi.Remote;
-import java.util.List;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * //TODO add interface commment here
@@ -10,6 +11,6 @@ import java.util.List;
  * @Date 2022/2/19 下午3:28
  */
 public interface IResourceRequester extends Remote {
-    List<ResourceHolder> getAddressList(String resourceId);
-    void deleteResourceRecord(ResourceHolder resourceHolder);
+    ArrayList<ResourceHolder> getAddressList(String resourceId) throws RemoteException;
+    void deleteResourceRecord(ResourceHolder resourceHolder) throws RemoteException;
 }
